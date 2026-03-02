@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PageShell from "../../layout/components/PageShell";
 import TopNav from "../../layout/components/TopNav";
-import { ALL_COMPANIES, EXPERIENCE_TYPES } from "../constants/filters";
+import { ALL_COMPANIES, EXPERIENCE_TYPES, ITEMS_PER_PAGE } from "../constants/filters";
 import ExperienceHero from "../components/ExperienceHero";
 import ExperienceResults from "../components/ExperienceResults";
 import { EXPERIENCE_ENTRIES, EXPERIENCE_OVERVIEW } from "../data/experience";
@@ -14,6 +14,7 @@ export default function ExperienciaView() {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [selectorQuery, setSelectorQuery] = useState("");
   const [openMenu, setOpenMenu] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const typeRef = useRef(null);
   const companyRef = useRef(null);
@@ -96,7 +97,17 @@ export default function ExperienciaView() {
       return [...selectedTechNormalizedSet].every((selectedTech) => entry.normalizedStackSet.has(selectedTech));
     });
   }, [entriesByScope, selectedTechNormalizedSet]);
-  const visibleEntryIds = useMemo(() => new Set(filteredEntries.map((entry) => entry.id)), [filteredEntries]);
+
+  const totalPages = useMemo(() => {
+    return Math.max(1, Math.ceil(filteredEntries.length / ITEMS_PER_PAGE));
+  }, [filteredEntries.length]);
+
+  const resolvedPage = useMemo(() => Math.min(currentPage, totalPages), [currentPage, totalPages]);
+
+  const paginatedEntries = useMemo(() => {
+    const start = (resolvedPage - 1) * ITEMS_PER_PAGE;
+    return filteredEntries.slice(start, start + ITEMS_PER_PAGE);
+  }, [filteredEntries, resolvedPage]);
 
   const heroFilterContext = useMemo(() => {
     return [
@@ -132,15 +143,18 @@ export default function ExperienciaView() {
     if (type !== "Profesional") {
       setSelectedCompany(ALL_COMPANIES);
     }
+    setCurrentPage(1);
     setOpenMenu(null);
   }, []);
 
   const handleCompanyChange = useCallback((company) => {
     setSelectedCompany(company);
+    setCurrentPage(1);
     setOpenMenu(null);
   }, []);
 
   const toggleTechnology = useCallback((tech) => {
+    setCurrentPage(1);
     setSelectedTechs((prevSelectedTechs) => {
       if (prevSelectedTechs.includes(tech)) {
         return prevSelectedTechs.filter((item) => item !== tech);
@@ -152,7 +166,15 @@ export default function ExperienciaView() {
   const clearTechnologies = useCallback(() => {
     setSelectedTechs([]);
     setSelectorQuery("");
+    setCurrentPage(1);
   }, []);
+
+  const handlePageChange = useCallback((nextPage) => {
+    setCurrentPage((prevPage) => {
+      const boundedPage = Math.min(totalPages, Math.max(1, nextPage));
+      return boundedPage === prevPage ? prevPage : boundedPage;
+    });
+  }, [totalPages]);
 
   const selectedTechLabel = useMemo(() => {
     if (!selectedTechs.length) {
@@ -226,14 +248,17 @@ export default function ExperienciaView() {
         />
 
         <ExperienceResults
-          entries={entriesWithNormalizedStack}
-          visibleEntryIds={visibleEntryIds}
-          visibleCount={filteredEntries.length}
+          entries={paginatedEntries}
+          totalResults={filteredEntries.length}
           activeType={activeType}
           selectedCompany={selectedCompany}
           allCompaniesLabel={ALL_COMPANIES}
           selectedTechCount={selectedTechs.length}
           selectedTechNormalizedSet={selectedTechNormalizedSet}
+          currentPage={resolvedPage}
+          totalPages={totalPages}
+          itemsPerPage={ITEMS_PER_PAGE}
+          onPageChange={handlePageChange}
         />
       </main>
     </PageShell>

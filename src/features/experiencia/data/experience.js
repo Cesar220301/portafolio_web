@@ -16,7 +16,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Remoto",
     detail:
       "Construí un microservicio disparado por trigger de Freshdesk para consultar la API SAP del cliente, recuperar pedidos y guías por ID de usuario, y mostrar la información como mini-SPA HTML dentro del ticket para evitar cambios de plataforma durante soporte.",
-    stack: ["Node.js", "Express", "Cloud Run"],
+    stack: ["Node.js", "Express", "Cloud Run","Artifact Registry"],
   },
   {
     id: "ptree-crediclub",
@@ -42,7 +42,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Remoto",
     detail:
       "Construí un dashboard interno full stack para analizar de 100 a 1,000 tickets por mes en Freshdesk: KPIs por tipo de solicitud, detección de clientes recurrentes y análisis de tono con IA.",
-    stack: ["React", "TanStack Query", "Node.js", "Prisma ORM", "Cloud SQL", "Gemini API"],
+    stack: ["React", "TanStack Query", "Node.js", "Prisma ORM", "Cloud SQL", "Gemini API","Artifact Registry"],
   },
   {
     id: "ptree-up",
@@ -55,7 +55,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Remoto",
     detail:
       "Implementé un chatbot institucional en Freshchat para consultas sobre reglamentos, procesos y servicios escolares usando RAG sobre documentos PDF institucionales. El historial se persiste en JSON diario en Cloud Storage para optimizar costos.",
-    stack: ["Node.js", "Vertex AI", "Cloud Run", "Cloud Storage", "RAG"],
+    stack: ["Node.js", "Vertex AI", "Cloud Run", "Cloud Storage", "RAG","Artifact Registry"],
   },
   {
     id: "ptree-fanasa",
@@ -68,7 +68,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Remoto",
     detail:
       "Realicé upgrade y soporte de plataforma AppSheet, afinando 23 flujos de aprobación por perfil, monto y actor. Desarrollé microservicio en Cloud Run para centralizar cambios de aprobador y automatizaciones, optimicé BD con tablas, índices y vistas SQL, y documenté en Mermaid versionado en Git.",
-    stack: ["Node.js", "Express", "Cloud Run", "Cloud SQL","MySQL", "AppSheet", "Mermaid"],
+    stack: ["Node.js", "Express", "Cloud Run", "Cloud SQL","MySQL", "AppSheet","Artifact Registry"],
   },
   {
     id: "ptree-ccu",

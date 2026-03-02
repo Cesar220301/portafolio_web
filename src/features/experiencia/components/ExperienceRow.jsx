@@ -1,9 +1,9 @@
 import { memo } from "react";
 import { normalizeText } from "../utils/normalize";
 
-function ExperienceRow({ entry, index, isVisible, selectedTechNormalizedSet }) {
+function ExperienceRow({ entry, index, selectedTechNormalizedSet }) {
   return (
-    <li className={`xp-row ${isVisible ? "" : "is-hidden"}`} aria-hidden={!isVisible}>
+    <li className="xp-row">
       <div className="xp-row-line" aria-hidden="true" />
       <div className="xp-row-index">{String(index + 1).padStart(2, "0")}</div>
 

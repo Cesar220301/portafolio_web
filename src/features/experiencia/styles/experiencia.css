@@ -369,13 +369,6 @@
   background: linear-gradient(180deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0));
 }
 
-.portfolio-azul .xp-row.is-hidden {
-  opacity: 0;
-  transform: translateY(-6px);
-  max-height: 0;
-  pointer-events: none;
-}
-
 .portfolio-azul .xp-row-index {
   width: 40px;
   height: 40px;
@@ -539,6 +532,69 @@
   font-size: 14px;
 }
 
+.portfolio-azul .xp-pagination {
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.portfolio-azul .xp-page-numbers {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.portfolio-azul .xp-page-btn {
+  border: 1px solid rgba(30, 58, 138, 0.2);
+  background: rgba(255, 255, 255, 0.9);
+  color: #1e3a8a;
+  border-radius: 10px;
+  min-height: 36px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.portfolio-azul .xp-page-num {
+  min-width: 36px;
+  display: inline-grid;
+  place-items: center;
+  padding: 8px;
+}
+
+.portfolio-azul .xp-page-btn:hover:not(:disabled) {
+  border-color: rgba(29, 78, 216, 0.45);
+  background: rgba(239, 246, 255, 0.9);
+}
+
+.portfolio-azul .xp-page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.portfolio-azul .xp-page-btn.is-active {
+  border-color: #1d4ed8;
+  background: #1d4ed8;
+  color: #fff;
+}
+
+.portfolio-azul .xp-page-btn:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.28);
+  outline-offset: 2px;
+}
+
+.portfolio-azul .xp-page-dots {
+  color: #64748b;
+  font-size: 13px;
+  padding: 0 2px;
+}
+
 @media (max-width: 1180px) {
   .portfolio-azul .xp-hero-layout {
     grid-template-columns: 1fr;
@@ -605,11 +661,16 @@
   .portfolio-azul .xp-signal-grid {
     grid-template-columns: 1fr;
   }
+
+  .portfolio-azul .xp-pagination {
+    justify-content: center;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .portfolio-azul .xp-select-trigger,
-  .portfolio-azul .xp-option {
+  .portfolio-azul .xp-option,
+  .portfolio-azul .xp-page-btn {
     transition: none;
   }
 }
