@@ -26,7 +26,7 @@ export default function TopNav({ primaryTo, primaryLabel, navStyle }) {
           {primaryLabel}
         </Link>
         <a
-          href="https://github.com/cesarespiridion"
+          href="https://github.com/cesar220301"
           target="_blank"
           rel="noreferrer"
           className="cta-secondary"
