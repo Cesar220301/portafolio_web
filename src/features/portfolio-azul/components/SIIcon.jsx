@@ -1,6 +1,7 @@
-﻿import { SI } from "../data/icons";
+﻿import { memo } from "react";
+import { SI } from "../data/icons";
 
-export default function SIIcon({ id, size = 22, colorOverride }) {
+function SIIcon({ id, size = 22, colorOverride }) {
   const icon = SI[id];
   if (!icon) return null;
 
@@ -17,3 +18,5 @@ export default function SIIcon({ id, size = 22, colorOverride }) {
     />
   );
 }
+
+export default memo(SIIcon);

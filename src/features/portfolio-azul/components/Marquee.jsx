@@ -1,6 +1,7 @@
-﻿import { MARQUEE_LOOP_ITEMS } from "../data/content";
+﻿import { memo } from "react";
+import { MARQUEE_LOOP_ITEMS } from "../data/content";
 
-export default function Marquee() {
+function Marquee() {
   return (
     <div
       style={{
@@ -33,3 +34,5 @@ export default function Marquee() {
     </div>
   );
 }
+
+export default memo(Marquee);

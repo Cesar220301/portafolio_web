@@ -1,4 +1,6 @@
-﻿export default function CenterMonogram() {
+﻿import { memo } from "react";
+
+function CenterMonogram() {
   return (
     <div
       style={{
@@ -32,3 +34,5 @@
     </div>
   );
 }
+
+export default memo(CenterMonogram);

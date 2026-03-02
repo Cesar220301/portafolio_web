@@ -1,17 +1,20 @@
-﻿import { useState } from "react";
+﻿import { memo, useCallback, useState } from "react";
 import SIIcon from "./SIIcon";
 import { SI } from "../data/icons";
 import { CONTACT_ORBIT_ANGLES, CONTACTS } from "../data/content";
 
-export default function ContactOrbit({ small = false }) {
+function ContactOrbit({ small = false }) {
   const [open, setOpen] = useState(false);
 
   const orbitR = small ? 46 : 54;
+  const handleToggle = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
 
   return (
     <div style={{ position: "relative", display: "inline-block" }}>
       <button
-        onClick={() => setOpen((o) => !o)}
+        onClick={handleToggle}
         className="cta-secondary"
         style={{
           padding: small ? "9px 18px" : "13px 28px",
@@ -65,3 +68,5 @@ export default function ContactOrbit({ small = false }) {
     </div>
   );
 }
+
+export default memo(ContactOrbit);
