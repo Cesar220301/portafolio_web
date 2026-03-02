@@ -100,7 +100,7 @@ export default function SobreMiView() {
 
           <div className="cta-row" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", animation: "fadeUp 0.5s ease 0.55s both" }}>
             <Link to="/experiencia" className="cta-primary" style={{ textDecoration: "none" }}>
-              Explorar experiencia -&gt;
+              Explorar experiencia
             </Link>
             <ContactOrbit />
           </div>
