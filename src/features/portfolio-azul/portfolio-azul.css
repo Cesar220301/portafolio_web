@@ -147,6 +147,19 @@
   position: relative;
   width: clamp(280px, 36vw, 420px);
   height: clamp(280px, 36vw, 420px);
+  transform-origin: center center;
+}
+
+@media (max-width: 1024px) {
+  .portfolio-azul .orbit-area {
+    height: 360px;
+  }
+
+  .portfolio-azul .orbit-scene {
+    width: 360px;
+    height: 360px;
+    transform: scale(0.8);
+  }
 }
 
 @media (max-width: 768px) {
@@ -158,13 +171,14 @@
   }
 
   .portfolio-azul .orbit-area {
-    height: 400px;
+    height: 320px;
     order: -1;
   }
 
   .portfolio-azul .orbit-scene {
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
+    transform: scale(0.72);
   }
 
   .portfolio-azul .text-side {
@@ -180,11 +194,12 @@
 
 @media (max-width: 480px) {
   .portfolio-azul .orbit-area {
-    height: 340px;
+    height: 260px;
   }
 
   .portfolio-azul .orbit-scene {
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
+    transform: scale(0.58);
   }
 }

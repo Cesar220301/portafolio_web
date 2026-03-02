@@ -123,7 +123,7 @@ export default function PortfolioAzul() {
               />
               <OrbitRing
                 items={RING2}
-                radius={108}
+                radius={120}
                 duration={30}
                 reverse={true}
                 itemSize={36}
@@ -132,7 +132,7 @@ export default function PortfolioAzul() {
               />
               <OrbitRing
                 items={RING3}
-                radius={144}
+                radius={164}
                 duration={38}
                 reverse={false}
                 itemSize={34}
@@ -141,7 +141,7 @@ export default function PortfolioAzul() {
               />
               <OrbitRing
                 items={RING4}
-                radius={178}
+                radius={208}
                 duration={50}
                 reverse={true}
                 itemSize={30}
