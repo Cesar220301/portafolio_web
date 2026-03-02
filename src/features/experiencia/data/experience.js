@@ -68,7 +68,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Remoto",
     detail:
       "Realicé upgrade y soporte de plataforma AppSheet, afinando 23 flujos de aprobación por perfil, monto y actor. Desarrollé microservicio en Cloud Run para centralizar cambios de aprobador y automatizaciones, optimicé BD con tablas, índices y vistas SQL, y documenté en Mermaid versionado en Git.",
-    stack: ["Node.js", "Express", "Cloud Run", "Cloud SQL", "AppSheet", "Mermaid"],
+    stack: ["Node.js", "Express", "Cloud Run", "Cloud SQL","MySQL", "AppSheet", "Mermaid"],
   },
   {
     id: "ptree-ccu",
@@ -106,7 +106,7 @@ export const EXPERIENCE_ENTRIES = [
     mode: "Independiente",
     detail:
       "Desarrollé una app web full stack para optimizar logística y control de pedidos: panel admin protegido, gestión de clientes, asignación de rutas y análisis de patrones de consumo.",
-    stack: ["Next.js 13", "NextAuth.js", "Material UI", "Leaflet", "API Routes", "Vercel MySQL", "Vercel"],
+    stack: ["Next.js","Material UI", "Leaflet","MySQL", "Vercel"],
   },
   {
     id: "personal-dental",
