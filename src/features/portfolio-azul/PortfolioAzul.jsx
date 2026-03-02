@@ -36,7 +36,6 @@ export default function PortfolioAzul() {
             className="cta-secondary" style={{padding:"9px 18px",fontSize:13}}>
             GitHub
           </a>
-          <ContactOrbit small />
         </div>
       </nav>
 
@@ -104,9 +103,6 @@ export default function PortfolioAzul() {
 
           <div className="cta-row" style={{display:"flex",gap:12,flexWrap:"wrap",alignItems:"center",animation:"fadeUp 0.5s ease 0.55s both"}}>
             <button className="cta-primary">Explorar experiencia →</button>
-            <a href="https://github.com/cesarespiridion" target="_blank" rel="noreferrer" className="cta-secondary">
-              <SIIcon id="git" size={14} colorOverride="#1e40af"/> GitHub
-            </a>
             <ContactOrbit />
           </div>
         </div>
@@ -158,7 +154,7 @@ export default function PortfolioAzul() {
       </div>
 
       {/* MARQUEE */}
-      <div style={{marginTop:48,opacity:loaded?1:0,transition:"opacity 0.6s ease 0.6s"}}>
+      <div style={{opacity:loaded?1:0,transition:"opacity 0.6s ease 0.6s"}}>
         <Marquee/>
       </div>
     </div>

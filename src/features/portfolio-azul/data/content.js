@@ -86,4 +86,4 @@ export const CONTACTS = [
   },
 ];
 
-export const CONTACT_ORBIT_ANGLES = [-118, -62];
+export const CONTACT_ORBIT_ANGLES = [118, 62];

@@ -12,13 +12,10 @@ export default function ContactOrbit({ small = false }) {
     <div style={{ position: "relative", display: "inline-block" }}>
       <button
         onClick={() => setOpen((o) => !o)}
-        className="cta-primary"
+        className="cta-secondary"
         style={{
           padding: small ? "9px 18px" : "13px 28px",
           fontSize: small ? 13 : 14,
-          background: open
-            ? "linear-gradient(135deg,#1e3a8a,#2563eb)"
-            : "linear-gradient(135deg,#1e40af,#3b82f6)",
           outline: "none",
           boxShadow: open
             ? "0 0 0 4px rgba(59,130,246,0.22), 0 4px 14px rgba(30,64,175,0.3)"
