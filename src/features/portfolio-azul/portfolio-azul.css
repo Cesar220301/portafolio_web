@@ -26,6 +26,24 @@
   to { transform: rotate(-360deg); }
 }
 
+@keyframes orbitKeepUprightF {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start-angle)) translateX(var(--orbit-radius)) rotate(calc(0deg - var(--start-angle)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle) + 360deg)) translateX(var(--orbit-radius)) rotate(calc(-360deg - var(--start-angle)));
+  }
+}
+
+@keyframes orbitKeepUprightR {
+  from {
+    transform: translate(-50%, -50%) rotate(var(--start-angle)) translateX(var(--orbit-radius)) rotate(calc(0deg - var(--start-angle)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(calc(var(--start-angle) - 360deg)) translateX(var(--orbit-radius)) rotate(calc(360deg - var(--start-angle)));
+  }
+}
+
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
   to { opacity: 1; transform: translateY(0); }

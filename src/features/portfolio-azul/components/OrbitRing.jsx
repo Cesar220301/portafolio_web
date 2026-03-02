@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+﻿import { useState } from "react";
 import SIIcon from "./SIIcon";
 import { SI } from "../data/icons";
 
@@ -12,19 +12,23 @@ export default function OrbitRing({
   layerZIndex = 30,
 }) {
   const [hovered, setHovered] = useState(null);
-  const spinAnim = reverse ? "spinR" : "spinF";
-  const counterAnim = reverse ? "spinF" : "spinR";
-  const halfSize = itemSize / 2;
+  const orbitAnim = reverse ? "orbitKeepUprightR" : "orbitKeepUprightF";
 
-  const positions = useMemo(() => {
-    return items.map((_, i) => {
-      const angle = (360 / items.length) * i * (Math.PI / 180);
-      return {
-        x: radius + Math.cos(angle) * radius - halfSize,
-        y: radius + Math.sin(angle) * radius - halfSize,
-      };
-    });
-  }, [items, radius, halfSize]);
+  const getOrbitItemStyle = (index) => {
+    const startAngle = (360 / items.length) * index;
+
+    return {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      width: itemSize,
+      height: itemSize,
+      "--start-angle": `${startAngle}deg`,
+      "--orbit-radius": `${radius}px`,
+      animation: `${orbitAnim} ${duration}s linear infinite`,
+      transform: `translate(-50%, -50%) rotate(${startAngle}deg) translateX(${radius}px) rotate(${-startAngle}deg)`,
+    };
+  };
 
   return (
     <>
@@ -46,29 +50,13 @@ export default function OrbitRing({
       <div
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: radius * 2,
-          height: radius * 2,
-          marginLeft: -radius,
-          marginTop: -radius,
-          animation: `${spinAnim} ${duration}s linear infinite`,
+          inset: 0,
           pointerEvents: "none",
           zIndex: layerZIndex - 1,
         }}
       >
         {items.map((item, i) => (
-          <div
-            key={item.id}
-            style={{
-              position: "absolute",
-              left: positions[i].x,
-              top: positions[i].y,
-              width: itemSize,
-              height: itemSize,
-              animation: `${counterAnim} ${duration}s linear infinite`,
-            }}
-          >
+          <div key={item.id} style={getOrbitItemStyle(i)}>
             <div
               style={{
                 width: itemSize,
@@ -96,13 +84,7 @@ export default function OrbitRing({
       <div
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
-          width: radius * 2,
-          height: radius * 2,
-          marginLeft: -radius,
-          marginTop: -radius,
-          animation: `${spinAnim} ${duration}s linear infinite`,
+          inset: 0,
           zIndex: layerZIndex,
           pointerEvents: "none",
         }}
@@ -113,13 +95,8 @@ export default function OrbitRing({
             onMouseEnter={() => setHovered(item.id)}
             onMouseLeave={() => setHovered(null)}
             style={{
-              position: "absolute",
-              left: positions[i].x,
-              top: positions[i].y,
-              width: itemSize,
-              height: itemSize,
+              ...getOrbitItemStyle(i),
               borderRadius: "50%",
-              animation: `${counterAnim} ${duration}s linear infinite`,
               cursor: "default",
               pointerEvents: "auto",
             }}
