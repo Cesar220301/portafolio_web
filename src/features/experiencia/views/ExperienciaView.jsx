@@ -1,4 +1,4 @@
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import PageShell from "../../layout/components/PageShell";
 import TopNav from "../../layout/components/TopNav";
 import { ALL_COMPANIES, EXPERIENCE_TYPES } from "../constants/filters";
@@ -14,10 +14,6 @@ export default function ExperienciaView() {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [selectorQuery, setSelectorQuery] = useState("");
   const [openMenu, setOpenMenu] = useState(null);
-  const deferredSelectorQuery = useDeferredValue(selectorQuery);
-  const deferredActiveType = useDeferredValue(activeType);
-  const deferredSelectedCompany = useDeferredValue(selectedCompany);
-  const deferredSelectedTechs = useDeferredValue(selectedTechs);
 
   const typeRef = useRef(null);
   const companyRef = useRef(null);
@@ -46,49 +42,61 @@ export default function ExperienciaView() {
 
   const companyOptions = useMemo(() => [ALL_COMPANIES, ...professionalCompanies], [professionalCompanies]);
 
-  const technologyUsage = useMemo(() => {
-    const usage = {};
-    entriesWithNormalizedStack.forEach((entry) => {
-      entry.stack.forEach((tech) => {
-        usage[tech] = (usage[tech] || 0) + 1;
-      });
-    });
-    return usage;
-  }, [entriesWithNormalizedStack]);
-
-  const visibleTechOptions = useMemo(() => {
-    const normalizedQuery = normalizeText(deferredSelectorQuery.trim());
-    if (!normalizedQuery) {
-      return allTechnologies;
-    }
-
-    return technologySearchIndex
-      .filter((item) => item.normalized.includes(normalizedQuery))
-      .map((item) => item.tech);
-  }, [allTechnologies, deferredSelectorQuery, technologySearchIndex]);
-
   const selectedTechSet = useMemo(() => new Set(selectedTechs), [selectedTechs]);
-  const selectedTechNormalizedSet = useMemo(
-    () => new Set(deferredSelectedTechs.map(normalizeText)),
-    [deferredSelectedTechs],
-  );
+  const selectedTechNormalizedSet = useMemo(() => new Set(selectedTechs.map(normalizeText)), [selectedTechs]);
 
-  const filteredEntries = useMemo(() => {
+  const entriesByScope = useMemo(() => {
     return entriesWithNormalizedStack.filter((entry) => {
-      const typeMatches = deferredActiveType === "Todas" || entry.type === deferredActiveType;
+      const typeMatches = activeType === "Todas" || entry.type === activeType;
       if (!typeMatches) return false;
 
-      const companyMatches =
-        deferredActiveType !== "Profesional" ||
-        deferredSelectedCompany === ALL_COMPANIES ||
-        entry.company === deferredSelectedCompany;
-      if (!companyMatches) return false;
+      if (activeType !== "Profesional") return true;
+      return selectedCompany === ALL_COMPANIES || entry.company === selectedCompany;
+    });
+  }, [activeType, entriesWithNormalizedStack, selectedCompany]);
 
+  const techOptions = useMemo(() => {
+    const normalizedQuery = normalizeText(selectorQuery.trim());
+
+    return technologySearchIndex.map(({ tech, normalized }) => {
+      const isSelected = selectedTechSet.has(tech);
+      const passesSearch = !normalizedQuery || normalized.includes(normalizedQuery);
+
+      let count = 0;
+      for (const entry of entriesByScope) {
+        let matchesSelected = true;
+        for (const selectedTech of selectedTechNormalizedSet) {
+          if (!entry.normalizedStackSet.has(selectedTech)) {
+            matchesSelected = false;
+            break;
+          }
+        }
+
+        if (!matchesSelected) continue;
+
+        if (isSelected || entry.normalizedStackSet.has(normalized)) {
+          count += 1;
+        }
+      }
+
+      return {
+        tech,
+        count,
+        isSelected,
+        passesSearch,
+        isVisible: passesSearch && (isSelected || count > 0),
+      };
+    });
+  }, [entriesByScope, selectedTechSet, selectedTechNormalizedSet, selectorQuery, technologySearchIndex]);
+
+  const filteredEntries = useMemo(() => {
+    return entriesByScope.filter((entry) => {
       if (!selectedTechNormalizedSet.size) return true;
 
       return [...selectedTechNormalizedSet].every((selectedTech) => entry.normalizedStackSet.has(selectedTech));
     });
-  }, [deferredActiveType, deferredSelectedCompany, entriesWithNormalizedStack, selectedTechNormalizedSet]);
+  }, [entriesByScope, selectedTechNormalizedSet]);
+  const visibleEntryIds = useMemo(() => new Set(filteredEntries.map((entry) => entry.id)), [filteredEntries]);
 
   const heroFilterContext = useMemo(() => {
     return [
@@ -188,21 +196,19 @@ export default function ExperienciaView() {
     onToggle: () => toggleMenu("tech"),
     selectorQuery,
     onQueryChange: setSelectorQuery,
-    visibleTechOptions,
-    selectedTechSet,
-    technologyUsage,
+    techOptions,
+    selectedCount: selectedTechs.length,
     onToggleTechnology: toggleTechnology,
     onClearTechnologies: clearTechnologies,
   }), [
     clearTechnologies,
     openMenu,
     selectedTechLabel,
-    selectedTechSet,
+    selectedTechs.length,
     selectorQuery,
-    technologyUsage,
+    techOptions,
     toggleMenu,
     toggleTechnology,
-    visibleTechOptions,
   ]);
 
   return (
@@ -220,7 +226,9 @@ export default function ExperienciaView() {
         />
 
         <ExperienceResults
-          entries={filteredEntries}
+          entries={entriesWithNormalizedStack}
+          visibleEntryIds={visibleEntryIds}
+          visibleCount={filteredEntries.length}
           activeType={activeType}
           selectedCompany={selectedCompany}
           allCompaniesLabel={ALL_COMPANIES}

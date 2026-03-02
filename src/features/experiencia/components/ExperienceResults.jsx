@@ -3,6 +3,8 @@ import ExperienceRow from "./ExperienceRow";
 
 function ExperienceResults({
   entries,
+  visibleEntryIds,
+  visibleCount,
   activeType,
   selectedCompany,
   allCompaniesLabel,
@@ -10,7 +12,7 @@ function ExperienceResults({
   selectedTechNormalizedSet,
 }) {
   const summaryText = useMemo(() => {
-    const parts = [`${entries.length} proyecto(s)`];
+    const parts = [`${visibleCount} proyecto(s)`];
 
     if (activeType === "Profesional" && selectedCompany !== allCompaniesLabel) {
       parts.push(`en ${selectedCompany}`);
@@ -21,32 +23,33 @@ function ExperienceResults({
     }
 
     return parts.join(" ");
-  }, [entries.length, activeType, selectedCompany, allCompaniesLabel, selectedTechCount]);
+  }, [visibleCount, activeType, selectedCompany, allCompaniesLabel, selectedTechCount]);
 
   return (
-    <section className={`xp-results ${entries.length === 0 ? "is-empty" : ""}`} aria-live="polite">
+    <section className={`xp-results ${visibleCount === 0 ? "is-empty" : ""}`} aria-live="polite">
       <div className="xp-results-head">
         <h2>Resultados</h2>
         <p>{summaryText}</p>
       </div>
 
-      {entries.length === 0 ? (
+      {visibleCount === 0 ? (
         <article className="xp-empty">
           <h3>Sin coincidencias</h3>
           <p>No encontré proyectos con esa combinación. Prueba cambiando tipo, empresa o tecnologías.</p>
         </article>
-      ) : (
-        <ol className="xp-stream">
-          {entries.map((entry, index) => (
-            <ExperienceRow
-              key={entry.id}
-              entry={entry}
-              index={index}
-              selectedTechNormalizedSet={selectedTechNormalizedSet}
-            />
-          ))}
-        </ol>
-      )}
+      ) : null}
+
+      <ol className="xp-stream">
+        {entries.map((entry, index) => (
+          <ExperienceRow
+            key={entry.id}
+            entry={entry}
+            index={index}
+            isVisible={visibleEntryIds.has(entry.id)}
+            selectedTechNormalizedSet={selectedTechNormalizedSet}
+          />
+        ))}
+      </ol>
     </section>
   );
 }

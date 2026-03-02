@@ -207,8 +207,9 @@
   max-height: 260px;
   overflow: auto;
   padding: 8px;
-  display: grid;
-  gap: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 .portfolio-azul .xp-single-option-list {
@@ -226,7 +227,24 @@
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  line-height: 1.35;
+  min-height: 40px;
+  max-height: 160px;
+  margin-bottom: 6px;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    max-height 220ms ease,
+    margin-bottom 220ms ease,
+    padding 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease;
+}
+
+.portfolio-azul .xp-option:last-child {
+  margin-bottom: 0;
 }
 
 .portfolio-azul .xp-single-option-list .xp-option {
@@ -241,6 +259,19 @@
 .portfolio-azul .xp-option.is-selected {
   border-color: rgba(59, 130, 246, 0.46);
   background: #eff6ff;
+}
+
+.portfolio-azul .xp-option.is-hidden {
+  opacity: 0;
+  transform: translateY(-4px);
+  max-height: 0;
+  min-height: 0;
+  margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-width: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
 .portfolio-azul .xp-option-check {
@@ -317,6 +348,14 @@
   grid-template-columns: 18px 46px 1fr;
   gap: 14px;
   align-items: start;
+  overflow: hidden;
+  max-height: 1200px;
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease,
+    max-height 260ms ease;
 }
 
 .portfolio-azul .xp-row-line {
@@ -328,6 +367,13 @@
 
 .portfolio-azul .xp-row:last-child .xp-row-line {
   background: linear-gradient(180deg, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0));
+}
+
+.portfolio-azul .xp-row.is-hidden {
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+  pointer-events: none;
 }
 
 .portfolio-azul .xp-row-index {
