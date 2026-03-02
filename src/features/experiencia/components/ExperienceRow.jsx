@@ -1,16 +1,7 @@
-import { memo, useMemo } from "react";
+import { memo } from "react";
 import { normalizeText } from "../utils/normalize";
 
-function ExperienceRow({ entry, index, selectedTechCount, selectedTechNormalizedSet }) {
-  const matchedCount = useMemo(() => {
-    if (!selectedTechCount) return 0;
-
-    return entry.stack.reduce(
-      (count, tech) => count + (selectedTechNormalizedSet.has(normalizeText(tech)) ? 1 : 0),
-      0,
-    );
-  }, [entry.stack, selectedTechCount, selectedTechNormalizedSet]);
-
+function ExperienceRow({ entry, index, selectedTechNormalizedSet }) {
   return (
     <li className="xp-row">
       <div className="xp-row-line" aria-hidden="true" />
@@ -39,14 +30,6 @@ function ExperienceRow({ entry, index, selectedTechCount, selectedTechNormalized
           <p>
             <strong>Periodo</strong>
             <span>{entry.period}</span>
-          </p>
-          <p>
-            <strong>Modalidad</strong>
-            <span>{entry.mode}</span>
-          </p>
-          <p>
-            <strong>Match</strong>
-            <span>{selectedTechCount ? `${matchedCount}/${selectedTechCount}` : "N/A"}</span>
           </p>
         </div>
 

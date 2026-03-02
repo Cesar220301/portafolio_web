@@ -42,7 +42,6 @@ function ExperienceResults({
               key={entry.id}
               entry={entry}
               index={index}
-              selectedTechCount={selectedTechCount}
               selectedTechNormalizedSet={selectedTechNormalizedSet}
             />
           ))}

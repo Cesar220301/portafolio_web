@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import PageShell from "../../layout/components/PageShell";
 import TopNav from "../../layout/components/TopNav";
 import { ALL_COMPANIES, EXPERIENCE_TYPES } from "../constants/filters";
@@ -14,6 +14,10 @@ export default function ExperienciaView() {
   const [selectedTechs, setSelectedTechs] = useState([]);
   const [selectorQuery, setSelectorQuery] = useState("");
   const [openMenu, setOpenMenu] = useState(null);
+  const deferredSelectorQuery = useDeferredValue(selectorQuery);
+  const deferredActiveType = useDeferredValue(activeType);
+  const deferredSelectedCompany = useDeferredValue(selectedCompany);
+  const deferredSelectedTechs = useDeferredValue(selectedTechs);
 
   const typeRef = useRef(null);
   const companyRef = useRef(null);
@@ -22,7 +26,7 @@ export default function ExperienciaView() {
   const entriesWithNormalizedStack = useMemo(() => {
     return EXPERIENCE_ENTRIES.map((entry) => ({
       ...entry,
-      normalizedStack: entry.stack.map(normalizeText),
+      normalizedStackSet: new Set(entry.stack.map(normalizeText)),
     }));
   }, []);
 
@@ -53,7 +57,7 @@ export default function ExperienciaView() {
   }, [entriesWithNormalizedStack]);
 
   const visibleTechOptions = useMemo(() => {
-    const normalizedQuery = normalizeText(selectorQuery.trim());
+    const normalizedQuery = normalizeText(deferredSelectorQuery.trim());
     if (!normalizedQuery) {
       return allTechnologies;
     }
@@ -61,29 +65,30 @@ export default function ExperienciaView() {
     return technologySearchIndex
       .filter((item) => item.normalized.includes(normalizedQuery))
       .map((item) => item.tech);
-  }, [allTechnologies, selectorQuery, technologySearchIndex]);
+  }, [allTechnologies, deferredSelectorQuery, technologySearchIndex]);
 
   const selectedTechSet = useMemo(() => new Set(selectedTechs), [selectedTechs]);
-  const selectedTechNormalizedSet = useMemo(() => new Set(selectedTechs.map(normalizeText)), [selectedTechs]);
+  const selectedTechNormalizedSet = useMemo(
+    () => new Set(deferredSelectedTechs.map(normalizeText)),
+    [deferredSelectedTechs],
+  );
 
   const filteredEntries = useMemo(() => {
     return entriesWithNormalizedStack.filter((entry) => {
-      const typeMatches = activeType === "Todas" || entry.type === activeType;
+      const typeMatches = deferredActiveType === "Todas" || entry.type === deferredActiveType;
       if (!typeMatches) return false;
 
       const companyMatches =
-        activeType !== "Profesional" ||
-        selectedCompany === ALL_COMPANIES ||
-        entry.company === selectedCompany;
+        deferredActiveType !== "Profesional" ||
+        deferredSelectedCompany === ALL_COMPANIES ||
+        entry.company === deferredSelectedCompany;
       if (!companyMatches) return false;
 
       if (!selectedTechNormalizedSet.size) return true;
 
-      return [...selectedTechNormalizedSet].every((selectedTech) =>
-        entry.normalizedStack.includes(selectedTech),
-      );
+      return [...selectedTechNormalizedSet].every((selectedTech) => entry.normalizedStackSet.has(selectedTech));
     });
-  }, [activeType, entriesWithNormalizedStack, selectedCompany, selectedTechNormalizedSet]);
+  }, [deferredActiveType, deferredSelectedCompany, entriesWithNormalizedStack, selectedTechNormalizedSet]);
 
   const heroFilterContext = useMemo(() => {
     return [
