@@ -122,13 +122,13 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  height: clamp(340px, 42vw, 500px);
+  height: clamp(380px, 46vw, 560px);
 }
 
 .portfolio-azul .orbit-scene {
   position: relative;
-  width: clamp(260px, 32vw, 400px);
-  height: clamp(260px, 32vw, 400px);
+  width: clamp(280px, 36vw, 420px);
+  height: clamp(280px, 36vw, 420px);
 }
 
 @media (max-width: 768px) {
@@ -140,13 +140,13 @@
   }
 
   .portfolio-azul .orbit-area {
-    height: 300px;
+    height: 360px;
     order: -1;
   }
 
   .portfolio-azul .orbit-scene {
-    width: 260px;
-    height: 260px;
+    width: 280px;
+    height: 280px;
   }
 
   .portfolio-azul .text-side {
@@ -162,11 +162,11 @@
 
 @media (max-width: 480px) {
   .portfolio-azul .orbit-area {
-    height: 260px;
+    height: 320px;
   }
 
   .portfolio-azul .orbit-scene {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
   }
 }
