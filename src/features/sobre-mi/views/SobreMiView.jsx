@@ -41,9 +41,9 @@ export default function SobreMiView() {
               animation: "fadeUp 0.5s ease 0.25s both",
             }}
           >
-            Cesar Espiridion
+            César Espiridion
             <br />
-            Martinez
+            Martínez
           </h1>
 
           <p
@@ -73,7 +73,7 @@ export default function SobreMiView() {
               <path d="M6 12v5c3 3 9 3 12 0v-5" />
             </svg>
             <span style={{ fontSize: 13, color: "#64748b", fontWeight: 400 }}>
-              Ing. en Sistemas Computacionales - TES Jocotitlan
+              Ing. en Sistemas Computacionales - TES Jocotitlán
             </span>
           </div>
 
@@ -82,14 +82,14 @@ export default function SobreMiView() {
               Persona <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>curiosa en constante aprendizaje</strong>, con facilidad para investigar, experimentar y compartir conocimiento.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.9, color: "#475569", fontWeight: 400, marginTop: 10 }}>
-              Mi proposito: aplicar tecnologia para <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>mejorar el sector salud en Mexico</strong>. Creo que el codigo bien escrito tiene el poder de cambiar vidas.
+              Mi propósito: aplicar tecnología para <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>mejorar el sector salud en México</strong>. Creo que el código bien escrito tiene el poder de cambiar vidas.
             </p>
           </div>
 
           <div className="stats-row" style={{ display: "flex", gap: 28, marginBottom: 36, animation: "fadeUp 0.5s ease 0.48s both" }}>
             {[
-              ["+1 ano", "experiencia profesional"],
-              ["3 anos", "proyectos propios"],
+              ["+1 año", "experiencia profesional"],
+              ["3 años", "proyectos propios"],
             ].map(([n, l]) => (
               <div key={l}>
                 <p style={{ fontSize: 21, fontWeight: 800, letterSpacing: "-0.03em", color: "#1e3a8a" }}>{n}</p>

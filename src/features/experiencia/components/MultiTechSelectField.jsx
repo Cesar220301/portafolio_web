@@ -31,7 +31,7 @@ function MultiTechSelectField({
       {isOpen && (
         <div id="xp-tech-filter-menu" className="xp-select-menu" role="listbox" aria-multiselectable="true">
           <div className="xp-menu-toolbar">
-            <p>Seleccion multiple</p>
+            <p>Selección múltiple</p>
             <button type="button" onClick={onClearTechnologies} disabled={selectedTechSet.size === 0}>
               Limpiar
             </button>
@@ -43,13 +43,13 @@ function MultiTechSelectField({
               type="text"
               value={selectorQuery}
               onChange={(event) => onQueryChange(event.target.value)}
-              placeholder="Buscar tecnologia..."
+              placeholder="Buscar tecnología..."
             />
           </div>
 
           <div className="xp-option-list">
             {visibleTechOptions.length === 0 ? (
-              <p className="xp-no-option">No hay tecnologias con ese texto.</p>
+              <p className="xp-no-option">No hay tecnologías con ese texto.</p>
             ) : (
               visibleTechOptions.map((tech) => {
                 const selected = selectedTechSet.has(tech);

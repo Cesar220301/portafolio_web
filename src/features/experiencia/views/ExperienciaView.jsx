@@ -94,7 +94,7 @@ export default function ExperienciaView() {
     return [
       `Tipo: ${activeType}`,
       activeType === "Profesional" ? `Empresa: ${selectedCompany}` : null,
-      selectedTechs.length ? `Stack: ${selectedTechs.length} tecnologias` : "Stack: sin filtro",
+      selectedTechs.length ? `Stack: ${selectedTechs.length} tecnologías` : "Stack: sin filtro",
     ]
       .filter(Boolean)
       .join("  |  ");
@@ -148,14 +148,14 @@ export default function ExperienciaView() {
 
   const selectedTechLabel = useMemo(() => {
     if (!selectedTechs.length) {
-      return "Selecciona una o varias tecnologias";
+      return "Selecciona una o varias tecnologías";
     }
 
     if (selectedTechs.length === 1) {
       return selectedTechs[0];
     }
 
-    return `${selectedTechs.length} tecnologias seleccionadas`;
+    return `${selectedTechs.length} tecnologías seleccionadas`;
   }, [selectedTechs]);
 
   const typeField = useMemo(() => ({
@@ -182,7 +182,7 @@ export default function ExperienciaView() {
 
   const techField = useMemo(() => ({
     fieldRef: techRef,
-    label: "Tecnologias (seleccion multiple)",
+    label: "Tecnologías (selección múltiple)",
     valueLabel: selectedTechLabel,
     isOpen: openMenu === "tech",
     onToggle: () => toggleMenu("tech"),
@@ -207,7 +207,7 @@ export default function ExperienciaView() {
 
   return (
     <PageShell>
-      <TopNav primaryTo="/" primaryLabel="Sobre mi" />
+      <TopNav primaryTo="/" primaryLabel="Sobre mí" />
 
       <main className="xp-page">
         <ExperienceHero

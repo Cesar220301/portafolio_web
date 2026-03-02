@@ -17,7 +17,7 @@ function ExperienceResults({
     }
 
     if (selectedTechCount) {
-      parts.push(`con ${selectedTechCount} tecnologia(s)`);
+      parts.push(`con ${selectedTechCount} tecnología(s)`);
     }
 
     return parts.join(" ");
@@ -33,7 +33,7 @@ function ExperienceResults({
       {entries.length === 0 ? (
         <article className="xp-empty">
           <h3>Sin coincidencias</h3>
-          <p>No encontre proyectos con esa combinacion. Prueba cambiando tipo, empresa o tecnologias.</p>
+          <p>No encontré proyectos con esa combinación. Prueba cambiando tipo, empresa o tecnologías.</p>
         </article>
       ) : (
         <ol className="xp-stream">
