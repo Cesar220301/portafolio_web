@@ -26,7 +26,7 @@ export const CONTACTS = [
     id: "wa",
     Icon: "whatsapp",
     label: "WhatsApp",
-    href: "https://wa.me/527211052641",
+    href: "https://wa.me/527121052641",
   },
   {
     id: "gmail",

@@ -45,20 +45,6 @@ export default function PortfolioAzul() {
 
         {/* LEFT */}
         <div className="text-side">
-
-          <div className="badge-wrap" style={{display:"flex",marginBottom:24,animation:"fadeUp 0.5s ease 0.15s both"}}>
-            <span style={{
-              display:"inline-flex",alignItems:"center",gap:7,
-              background:"white",border:"1px solid rgba(30,58,138,0.1)",
-              borderRadius:100,padding:"6px 14px",
-              fontSize:12,fontWeight:500,color:"#3b82f6",
-              boxShadow:"0 1px 6px rgba(30,58,138,0.08)",
-            }}>
-              <span style={{width:7,height:7,borderRadius:"50%",background:"#22c55e",display:"inline-block",boxShadow:"0 0 0 2px rgba(34,197,94,0.25)"}}/>
-              Disponible para nuevos proyectos
-            </span>
-          </div>
-
           <h1 style={{
             fontSize:"clamp(34px,4.5vw,56px)",
             fontWeight:800,letterSpacing:"-0.04em",lineHeight:1.05,
@@ -106,9 +92,8 @@ export default function PortfolioAzul() {
 
           <div className="stats-row" style={{display:"flex",gap:28,marginBottom:36,animation:"fadeUp 0.5s ease 0.48s both"}}>
             {[
-              ["1 año",  "experiencia profesional"],
-              ["3 años", "proyectos propios"],
-              ["ISC",    "Titulado 2024"],
+              ["+1 año",  "experiencia profesional"],
+              ["3 años", "proyectos propios"]
             ].map(([n,l]) => (
               <div key={l}>
                 <p style={{fontSize:21,fontWeight:800,letterSpacing:"-0.03em",color:"#1e3a8a"}}>{n}</p>

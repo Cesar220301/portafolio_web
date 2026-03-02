@@ -4,17 +4,16 @@ export default function SIIcon({ id, size = 22, colorOverride }) {
   const icon = SI[id];
   if (!icon) return null;
 
+  const IconComponent = icon.Icon;
   const col = colorOverride || icon.color;
 
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill={col}
+    <IconComponent
+      size={size}
+      color={col}
       style={{ display: "block", flexShrink: 0 }}
-    >
-      <path d={icon.path} />
-    </svg>
+      aria-hidden="true"
+      focusable="false"
+    />
   );
 }
