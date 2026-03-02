@@ -1,6 +1,6 @@
 ﻿import { useEffect, useState } from "react";
 import "./portfolio-azul.css";
-import { RING1, RING2, RING3 } from "./data/content";
+import { RING1, RING2, RING3, RING4 } from "./data/content";
 import SIIcon from "./components/SIIcon";
 import OrbitRing from "./components/OrbitRing";
 import CenterMonogram from "./components/CenterMonogram";
@@ -118,28 +118,37 @@ export default function PortfolioAzul() {
               <CenterMonogram/>
               <OrbitRing
                 items={RING1}
-                radius={96}
-                duration={24}
+                radius={72}
+                duration={20}
                 reverse={false}
-                itemSize={40}
-                iconSize={19}
-                layerZIndex={40}
+                itemSize={42}
+                iconSize={20}
+                layerZIndex={50}
               />
               <OrbitRing
                 items={RING2}
-                radius={142}
-                duration={34}
+                radius={108}
+                duration={30}
                 reverse={true}
                 itemSize={36}
                 iconSize={17}
-                layerZIndex={30}
+                layerZIndex={40}
               />
               <OrbitRing
                 items={RING3}
-                radius={182}
-                duration={52}
+                radius={144}
+                duration={38}
                 reverse={false}
-                itemSize={32}
+                itemSize={34}
+                iconSize={16}
+                layerZIndex={30}
+              />
+              <OrbitRing
+                items={RING4}
+                radius={178}
+                duration={50}
+                reverse={true}
+                itemSize={30}
                 iconSize={15}
                 layerZIndex={20}
               />
