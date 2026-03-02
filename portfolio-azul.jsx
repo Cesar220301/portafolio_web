@@ -1,1 +1,1 @@
-export { default } from "./src/features/portfolio-azul/PortfolioAzul.jsx";
+export { default } from "./src/features/sobre-mi/views/SobreMiView.jsx";

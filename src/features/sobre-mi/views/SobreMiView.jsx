@@ -1,13 +1,15 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./portfolio-azul.css";
-import { RING1, RING2, RING3, RING4 } from "./data/content";
-import OrbitRing from "./components/OrbitRing";
-import CenterMonogram from "./components/CenterMonogram";
-import ContactOrbit from "./components/ContactOrbit";
-import Marquee from "./components/Marquee";
+import PageShell from "../../layout/components/PageShell";
+import TopNav from "../../layout/components/TopNav";
+import OrbitRing from "../components/OrbitRing";
+import CenterMonogram from "../components/CenterMonogram";
+import ContactOrbit from "../components/ContactOrbit";
+import Marquee from "../components/Marquee";
+import { RING1, RING2, RING3, RING4 } from "../data/content";
+import "../styles/sobre-mi.css";
 
-export default function PortfolioAzul() {
+export default function SobreMiView() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -16,44 +18,15 @@ export default function PortfolioAzul() {
   }, []);
 
   return (
-    <div className="portfolio-azul">
-      <div className="bg-mesh" />
-
-      <nav
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 100,
-          background: "rgba(248,250,255,0.88)",
-          backdropFilter: "blur(14px)",
-          borderBottom: "1px solid rgba(30,58,138,0.08)",
-          height: 64,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 clamp(20px,6vw,72px)",
+    <PageShell>
+      <TopNav
+        primaryTo="/experiencia"
+        primaryLabel="Experiencia"
+        navStyle={{
           opacity: loaded ? 1 : 0,
           transition: "opacity 0.5s ease",
         }}
-      >
-        <span style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.04em", color: "#1e3a8a" }}>
-          Cesar<span style={{ color: "#93c5fd", fontWeight: 500 }}>.dev</span>
-        </span>
-        <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-          <Link to="/experiencia" className="cta-secondary" style={{ padding: "9px 18px", fontSize: 13 }}>
-            Experiencia
-          </Link>
-          <a
-            href="https://github.com/cesarespiridion"
-            target="_blank"
-            rel="noreferrer"
-            className="cta-secondary"
-            style={{ padding: "9px 18px", fontSize: 13 }}
-          >
-            GitHub
-          </a>
-        </div>
-      </nav>
+      />
 
       <div className="hero-grid" style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.7s ease 0.1s" }}>
         <div className="text-side">
@@ -149,6 +122,6 @@ export default function PortfolioAzul() {
       <div style={{ opacity: loaded ? 1 : 0, transition: "opacity 0.6s ease 0.6s" }}>
         <Marquee />
       </div>
-    </div>
+    </PageShell>
   );
 }
