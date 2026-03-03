@@ -82,8 +82,36 @@ export default function SobreMiView() {
               Persona <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>curiosa en constante aprendizaje</strong>, con facilidad para investigar, experimentar y compartir conocimiento.
             </p>
             <p style={{ fontSize: 15, lineHeight: 1.9, color: "#475569", fontWeight: 400, marginTop: 10 }}>
-              Mi propósito: aplicar tecnología para <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>mejorar el sector salud en México</strong>. Creo que el código bien escrito tiene el poder de cambiar vidas.
+              Mi propósito: aplicar mi experiencia y conocimiento tecnológico en <strong style={{ color: "#1e3a8a", fontWeight: 700 }}>proyectos que contribuyan al sector salud</strong> en Mexico.
             </p>
+          </div>
+
+          {/* IA block */}
+          <div style={{ marginBottom: 28, animation: "fadeUp 0.5s ease 0.44s both" }}>
+            <p style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.1em", color: "#94a3b8", textTransform: "uppercase", marginBottom: 10 }}>
+              IA como herramienta
+            </p>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {[
+                "Integrada al ciclo de desarrollo, testing y documentación",
+                "Orquestación supervisada",
+              ].map((t) => (
+                <span
+                  key={t}
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 500,
+                    color: "#1e40af",
+                    background: "#eff6ff",
+                    border: "1px solid #bfdbfe",
+                    borderRadius: 20,
+                    padding: "4px 12px",
+                  }}
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="stats-row" style={{ display: "flex", gap: 28, marginBottom: 36, animation: "fadeUp 0.5s ease 0.48s both" }}>
